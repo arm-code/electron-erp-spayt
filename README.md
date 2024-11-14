@@ -1,5 +1,7 @@
 
+
 ### Install
+npx create @quick-start/electron
 
 ```bash
 $ npm install
