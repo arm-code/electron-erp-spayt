@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Nav } from './NavBar.styles'
 
 export const NavBar = () => {
@@ -7,16 +7,37 @@ export const NavBar = () => {
     <Nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink 
+            to="/" 
+            end
+            className={({ isActive }) => (isActive ? 'active-link' : '')} // Aquí se usa `isActive` para asignar la clase activa
+          >
+            Home
+          </NavLink>
         </li>
         <li>
-          <Link to="/plantillas">Plantillas</Link>
+          <NavLink 
+            to="/plantillas" 
+            className={({ isActive }) => (isActive ? 'active-link' : '')}
+          >
+            Plantillas
+          </NavLink>
         </li>
         <li>
-          <Link to="/constancias">Constancias</Link>
+          <NavLink 
+            to="/constancias" 
+            className={({ isActive }) => (isActive ? 'active-link' : '')}
+          >
+            Constancias
+          </NavLink>
         </li>
         <li>
-          <Link to="/certificacion">Certificacion</Link>
+          <NavLink 
+            to="/certificacion" 
+            className={({ isActive }) => (isActive ? 'active-link' : '')}
+          >
+            Certificación
+          </NavLink>
         </li>
       </ul>
       <hr />
