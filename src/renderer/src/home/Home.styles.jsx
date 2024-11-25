@@ -8,10 +8,10 @@ export const HomeContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;  
-  color: #fff;
+  color: var(--black);
   text-align: center;
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;  
+  
 `;
 
 // Estilos para el título
@@ -55,7 +55,7 @@ export const ModuleContainer = styled.div`
 
 // Estilos para los botones de módulo
 export const ModuleButton = styled(Link)`
-  background-color: #3cb371;
+  background-color: var(--green);
   color: #fff;
   border: none;
   border-radius: 10px;

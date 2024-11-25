@@ -1,20 +1,21 @@
 import styled from 'styled-components'
 
-export const Nav = styled.nav`
-  padding: 0.1rem 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+export const Nav = styled.nav` 
+  
   position: sticky;
   top: 0;
   z-index: 100;
+  background-color: var(--black);
   width: 100%;
+  height: 80px;   
+  display: flex;
+  align-items: center;  
 
   /* Estilos para los enlaces dentro de la lista */
   ul {
     list-style: none;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    padding: 0;
+    display: flex;        
+    gap: 15px;
   }
 
   li {
@@ -23,10 +24,10 @@ export const Nav = styled.nav`
 
   a {
     text-decoration: none;
-    color: #fff;
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    color: var(--white);
+    font-size: var(--font-size-xl);
+    font-weight:  var(--font-weight-medium);
+    padding: 0.5rem 1rem;    
     transition:
       background-color 0.3s,
       transform 0.2s ease;
@@ -34,13 +35,15 @@ export const Nav = styled.nav`
 
   /* Efecto hover para los enlaces */
   a:hover {
-    background-color: #4caf50;
+    background-color: var(--blue);
     transform: scale(1.1);
+    color: var(--white);
   }
 
   /* Estilos para el enlace activo */
   .active-link {
-    background-color: #4caf50;
+    background-color: var(--blue);
+    color: var(--white);
     font-weight: bold;
   }
 

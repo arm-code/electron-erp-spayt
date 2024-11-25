@@ -1,10 +1,8 @@
 @import './base.css';
 
 body {  
-  overflow: hidden;
-  padding: 15px;
-  background-image: url('./wavy-lines.svg');
-  background-size: cover; 
+  overflow: hidden;  
+  background-size: cover;  
   
 }
 
