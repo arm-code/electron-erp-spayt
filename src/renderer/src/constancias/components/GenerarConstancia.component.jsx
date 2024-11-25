@@ -5,7 +5,7 @@ export const GenerarConstancia = () => {
   const initialValues = {
     tipoConstancia: '',
     matricula: '',
-    erncargadoOficina: ''
+    encargadoOficina: ''
   }
 
   const validationSchema = Yup.object({
@@ -13,7 +13,7 @@ export const GenerarConstancia = () => {
     matricula: Yup.string()
       .required('Ingrese la matricula.')
       .matches(/^\d+$/, 'La matrícula debe ser numérica.'),
-    erncargadoOficina: Yup.string().required('Seleccione el encargado de la oficina.')
+    encargadoOficina: Yup.string().required('Seleccione el encargado de la oficina.')
   })
 
   const handleSubmit = (data) => {
@@ -25,36 +25,36 @@ export const GenerarConstancia = () => {
   }
 
   return (
-    <Formik initialValues={initialValues} validationSchema={{ validationSchema }} onSubmit={{}}>
+    <Formik initialValues={initialValues} validationSchema={ validationSchema } onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
         <Form>
           <div>
-            <label htmlFor="certificateType">Tipo de constancia:</label>
-            <Field as="select" name="certificateType">
+            <label htmlFor="tipoConstancia">Tipo de constancia:</label>
+            <Field as="select" name="tipoConstancia">
               <option value="">Selecciona...</option>
               <option value="student">Constancia de estudiante</option>
               <option value="graduation">Constancia de término de estudios</option>
             </Field>
-            <ErrorMessage name="certificateType" component="div" style={{ color: 'red' }} />
+            <ErrorMessage name="tipoConstancia" component="div" style={{ color: 'red' }} />
           </div>
 
           <div>
-            <label htmlFor="studentId">Matrícula del estudiante:</label>
-            <Field type="text" name="studentId" />
-            <ErrorMessage name="studentId" component="div" style={{ color: 'red' }} />
+            <label htmlFor="matricula">Matrícula del estudiante:</label>
+            <Field type="text" name="matricula" />
+            <ErrorMessage name="matricula" component="div" style={{ color: 'red' }} />
           </div>
 
           <div>
-            <label htmlFor="officeManager">Encargado de la oficina:</label>
-            <Field as="select" name="officeManager">
+            <label htmlFor="encargadoOficina">Encargado de la oficina:</label>
+            <Field as="select" name="encargadoOficina">
               <option value="">Selecciona...</option>
               <option value="manager1">Encargado 1</option>
               <option value="manager2">Encargado 2</option>
             </Field>
-            <ErrorMessage name="officeManager" component="div" style={{ color: 'red' }} />
+            <ErrorMessage name="encargadoOficina" component="div" style={{ color: 'red' }} />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" >
             Generar Constancia
           </button>
         </Form>
@@ -62,5 +62,3 @@ export const GenerarConstancia = () => {
     </Formik>
   )
 }
-
-
