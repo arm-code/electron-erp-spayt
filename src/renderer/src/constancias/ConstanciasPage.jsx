@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion' // Importamos motion de framer-motion
 import { Module, PageContainer } from './ConstanciasPage.styles'
 import { GenerarConstancia } from './components/GenerarConstancia.component'
+import { GetStudent } from './components/GetStudent.component'
 
 export const ConstanciasPage = () => {
   return (
@@ -13,7 +14,7 @@ export const ConstanciasPage = () => {
         <h1>Constancias</h1>
         <hr />
         <Module>
-          <GenerarConstancia />
+          <GetStudent/>          
         </Module>
       </PageContainer>
     </motion.div>

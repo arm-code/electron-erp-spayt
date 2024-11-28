@@ -2,39 +2,29 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { generarConstanciaTermino } from '../../utils/generarConstancias/generarConstanciaTermino'
 import { useState } from 'react'
+import { getCurrentDateFormatted } from '../../utils/dates/dateFormats'
 
-export const GenerarConstancia = () => {
+export const GenerarConstancia = ({student}) => {
   const [pdfUrl, setPdfUrl] = useState(null)
 
   const initialValues = {
-    tipoConstancia: '',
-    matricula: '',
+    tipoConstancia: '',    
     encargadoOficina: ''
   }
 
   const validationSchema = Yup.object({
-    tipoConstancia: Yup.string().required('Selecciona el tipo de constancia.'),
-    matricula: Yup.string()
-      .required('Ingrese la matricula.')
-      .matches(/^\d+$/, 'La matrícula debe ser numérica.'),
+    tipoConstancia: Yup.string().required('Selecciona el tipo de constancia.'),    
     encargadoOficina: Yup.string().required('Seleccione el encargado de la oficina.')
   })
 
   const handleSubmit = (data) => {
     console.log('generando constancia...')
-    data = {
-      nombre: 'Alexis Emilio',
-      primer_apellido: 'Romero',
-      segundo_apellido: 'Mendoza',
-      fecha_entrega: '18 enero del 2025',
-      matricula: '240802090998',
-      year: '2024',
-      numeroOficio: '190'
-    }
-    
+    const date = getCurrentDateFormatted()
+    const dataStudent = {...data, student, date}
+    console.log(dataStudent)
 
     // Guardar la URL en el estado
-    setPdfUrl(generarConstanciaTermino(data));
+    setPdfUrl(generarConstanciaTermino(dataStudent));
   }
 
   const descargarPDF = () => {
@@ -59,17 +49,11 @@ export const GenerarConstancia = () => {
             <label htmlFor="tipoConstancia">Tipo de constancia:</label>
             <Field as="select" name="tipoConstancia">
               <option value="">Selecciona...</option>
-              <option value="student">Constancia de estudiante</option>
+              <option value="student">Constancia de estudios</option>
               <option value="graduation">Constancia de término de estudios</option>
             </Field>
             <ErrorMessage name="tipoConstancia" component="div" style={{ color: 'red' }} />
-          </div>
-
-          <div>
-            <label htmlFor="matricula">Matrícula del estudiante:</label>
-            <Field type="text" name="matricula" />
-            <ErrorMessage name="matricula" component="div" style={{ color: 'red' }} />
-          </div>
+          </div>          
 
           <div>
             <label htmlFor="encargadoOficina">Encargado de la oficina:</label>
@@ -81,7 +65,7 @@ export const GenerarConstancia = () => {
             <ErrorMessage name="encargadoOficina" component="div" style={{ color: 'red' }} />
           </div>
 
-          <button type="submit">Generar Constancia</button>
+          <button type="submit">Emitir Constancia</button>
         </Form>
       </Formik>
 
