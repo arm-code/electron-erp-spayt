@@ -18,7 +18,7 @@ export const generarConstancia = (data) => {
   doc.addImage(logos, 'JPEG', 0,0, 612, 792 )
   doc.addImage(spayt, 'JPEG', margenIzquierdo,15, 100, 50 )
 
-  // Texto que deseas agregar
+  // Texto 
   const textoLinea1 = 'Oficina Ciudad Juárez'
   const textoLinea2 = `No. de Oficio SPAyT OCJ ${data.numeroOficio} / ${data.year}`
   const textoLinea3 = `Cd. Juárez, Chih., a 28 de junio de 2024`
@@ -27,19 +27,9 @@ export const generarConstancia = (data) => {
 
   const textContent2 = `Se extiende la presente en Cd. Juárez, Chih. A los veintiocho días del mes de junio del dos mil veinticuatro, a solicitud del interesado (a) para los fines legales que correspondan. `
 
-  // Calcular el ancho de las líneas de texto
-  const anchoTexto1 =
-    (doc.getStringUnitWidth(textoLinea1) * doc.internal.getFontSize()) / doc.internal.scaleFactor
-  const anchoTexto2 =
-    (doc.getStringUnitWidth(textoLinea2) * doc.internal.getFontSize()) / doc.internal.scaleFactor
-  const anchoTexto3 =
-    (doc.getStringUnitWidth(textoLinea3) * doc.internal.getFontSize()) / doc.internal.scaleFactor
-  console.log(anchoTexto1, anchoTexto2, anchoTexto3)
- 
-  
-
   // Agregar las líneas de texto alineadas a la derecha
   doc.setFontSize(9)
+  doc.setFont('Helvetica', 'italic')
 
   //doc.text(textoLinea1, posicionX1, posicionY)
   doc.text(textoLinea1, 612-margenDerecho, margenSuperior + 40, {align: 'right'})
@@ -55,6 +45,26 @@ export const generarConstancia = (data) => {
   //const textAjustado = doc.splitTextToSize(textContent,450)
   doc.text(textContent, margenIzquierdo,margenSuperior + 150, {align: 'justify', maxWidth: 612 - margenDerecho -margenIzquierdo})
   doc.text(textContent2, margenIzquierdo, margenSuperior + 300, {align: 'justify', maxWidth: 612 -margenDerecho -margenIzquierdo} )
+
+  doc.setFont('Helvetica', 'bold')
+  doc.text('ATENTAMENTE', 612/2+margenDerecho-margenIzquierdo, margenSuperior + 400, {align: 'center' })
+  doc.text('LIC. OLGA LIDIA CORONA CORTEZ.', 612/2+margenDerecho-margenIzquierdo, margenSuperior + 470, {align: 'center' })
+  doc.text('RESPONSABLE DEL SUBSISTEMA DE PREPARATORIA ABIERTA', 612/2+margenDerecho-margenIzquierdo, margenSuperior + 490, {align: 'center' })
+  doc.text('EN CD JUAREZ CHIH.', 612/2+margenDerecho-margenIzquierdo, margenSuperior + 510, {align: 'center' })
+
+  doc.setFont('Helvetica', 'bold')
+  doc.setFontSize(7)
+  doc.text('“2024, Año del Bicentenario de la fundación del estado de Chihuahua”', 612-margenDerecho-20, margenSuperior + 620, {align: 'right'})
+
+  doc.setFont('Helvetica', 'normal')
+  doc.setFontSize(7)
+  doc.text('AV.16 de septiembre # 1232 Edif. San Carlos. Col Partido Romero Cd. Juárez, Chih.', 612-margenDerecho, margenSuperior + 640, {align: 'right'})
+  doc.text('Tel. (656) 6-29-33-00 Ext. 55318 55213', 612/2+20, margenSuperior + 650, {align: 'left'})
+  doc.text('www.spaytchihuahua.gob.mx', 612/2+35, margenSuperior + 660, {align: 'left'})
+
+  doc.setFont('Helvetica', 'normal')
+  doc.setFontSize(8)
+  doc.text('CSHA/SCPA.', margenIzquierdo, margenSuperior + 580)
 
   const pdfBlob = doc.output('blob')
   const pdfUrl = URL.createObjectURL(pdfBlob)
