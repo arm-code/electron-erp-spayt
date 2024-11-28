@@ -33,8 +33,11 @@ export const generarConstancia = (data) => {
 
   //doc.text(textoLinea1, posicionX1, posicionY)
   doc.text(textoLinea1, 612-margenDerecho, margenSuperior + 40, {align: 'right'})
-  doc.text(textoLinea2, 612-margenDerecho, margenSuperior + 50, {align: 'right'}) // Desplazar 20 puntos hacia abajo para la segunda línea
-  doc.text(textoLinea3, 612-margenDerecho, margenSuperior + 70, {align: 'right'}) // Desplazar otros 20 puntos hacia abajo para la tercera línea
+  doc.text(textoLinea2, 612-margenDerecho, margenSuperior + 50, {align: 'right'}) 
+
+  doc.setFontSize(9)
+  doc.setFont('Helvetica', 'normal')
+  doc.text(textoLinea3, 612-margenDerecho, margenSuperior + 70, {align: 'right'}) 
 
   doc.setFontSize(12)
   doc.setFont('Helvetica', 'bold')

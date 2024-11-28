@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { generarConstancia } from '../../utils/generarConstancias/generarConstancia'
+import { generarConstanciaTermino } from '../../utils/generarConstancias/generarConstanciaTermino'
 import { useState } from 'react'
 
 export const GenerarConstancia = () => {
@@ -34,7 +34,7 @@ export const GenerarConstancia = () => {
     
 
     // Guardar la URL en el estado
-    setPdfUrl(generarConstancia(data));
+    setPdfUrl(generarConstanciaTermino(data));
   }
 
   const descargarPDF = () => {
