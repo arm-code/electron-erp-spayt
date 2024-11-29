@@ -1,41 +1,69 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { generarConstanciaTermino } from '../../utils/generarConstancias/generarConstanciaTermino'
+import { generarConstanciaEstudiante } from '../../utils/generarConstancias/generarConstanciaEstudiante'
 import { useState } from 'react'
-import { getCurrentDateFormatted } from '../../utils/dates/dateFormats'
+import { getCurrentDateFormatted, getFormattedDateInWords } from '../../utils/dates/dateFormats'
 
-export const GenerarConstancia = ({student}) => {
+export const GenerarConstancia = ({ student }) => {
   const [pdfUrl, setPdfUrl] = useState(null)
+  const [isGraduation, setIsGraduation] = useState(false)
 
   const initialValues = {
-    tipoConstancia: '',    
-    encargadoOficina: ''
+    tipoConstancia: '',
+    encargadoOficina: '',
+    fechaEntregaCertificado: ''
   }
 
   const validationSchema = Yup.object({
-    tipoConstancia: Yup.string().required('Selecciona el tipo de constancia.'),    
-    encargadoOficina: Yup.string().required('Seleccione el encargado de la oficina.')
-  })
+    tipoConstancia: Yup.string().required('Selecciona el tipo de constancia.'),
+    encargadoOficina: Yup.string().required('Seleccione el encargado de la oficina.'),
+    fechaEntregaCertificado: Yup.string().when('tipoConstancia', (tipoConstancia, schema) => {
+      return tipoConstancia === 'graduation'
+        ? schema.required('La fecha de graduación es obligatoria.')
+        : schema;
+    }),
+  });
+  
+
+  const handleTypeConstanciaChange = (e, setFieldValue) => {
+    const selectedValue = e.target.value
+    setFieldValue('tipoConstancia', selectedValue)
+    setIsGraduation(selectedValue === 'graduation')
+  }
 
   const handleSubmit = (data) => {
-    console.log('generando constancia...')
     const date = getCurrentDateFormatted()
-    const dataStudent = {...data, student, date}
-    console.log(dataStudent)
+    const dateInWords = getFormattedDateInWords(date)
+    const dataStudent = { ...data, student, date, dateInWords }
+    switch (data.tipoConstancia) {
+      case 'student': {
+        console.log(dataStudent)
+        // Guardar la URL en el estado
+        setPdfUrl(generarConstanciaEstudiante(dataStudent))
+        break
+      }
+      case 'graduation': {
+        // Guardar la URL en el estado
+        setPdfUrl(generarConstanciaTermino(dataStudent))
+        break
+      }
 
-    // Guardar la URL en el estado
-    setPdfUrl(generarConstanciaTermino(dataStudent));
+      default:
+        console.warn('Tipo de constancia no válido:', data.tipoConstancia)
+        break
+    }
   }
 
   const descargarPDF = () => {
-    const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.download = 'constancia.pdf';
-    link.click();
+    const link = document.createElement('a')
+    link.href = pdfUrl
+    link.download = 'constancia.pdf'
+    link.click()
     // Liberar memoria después de descargar
-    URL.revokeObjectURL(pdfUrl);
-    setPdfUrl(null);
-  };
+    URL.revokeObjectURL(pdfUrl)
+    setPdfUrl(null)
+  }
 
   return (
     <>
@@ -44,16 +72,25 @@ export const GenerarConstancia = ({student}) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
+        {({setFieldValue}) => (
         <Form>
           <div>
             <label htmlFor="tipoConstancia">Tipo de constancia:</label>
-            <Field as="select" name="tipoConstancia">
+            <Field as="select" name="tipoConstancia" onChange={ (e) => handleTypeConstanciaChange(e, setFieldValue)}>
               <option value="">Selecciona...</option>
               <option value="student">Constancia de estudios</option>
               <option value="graduation">Constancia de término de estudios</option>
             </Field>
             <ErrorMessage name="tipoConstancia" component="div" style={{ color: 'red' }} />
-          </div>          
+          </div>
+
+          {isGraduation && (
+            <div>
+              <label htmlFor="fechaEntregaCertificado">Fecha de entrega de certificado: </label>
+              <Field type='date' name='fechaEntregaCertificado'></Field>
+              <ErrorMessage name='fechaEntregaCertificado' component='span' style={{color: 'red'}}/>
+            </div>
+          )}
 
           <div>
             <label htmlFor="encargadoOficina">Encargado de la oficina:</label>
@@ -67,6 +104,7 @@ export const GenerarConstancia = ({student}) => {
 
           <button type="submit">Emitir Constancia</button>
         </Form>
+        )}
       </Formik>
 
       {pdfUrl && (

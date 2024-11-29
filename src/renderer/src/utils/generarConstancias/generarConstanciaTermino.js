@@ -1,6 +1,7 @@
 import { jsPDF } from 'jspdf'
 import logos from './logos.jpg'
 import spayt from './spayt.jpg'
+import { formattedDate} from '../dates/dateFormats'
 
 export const generarConstanciaTermino = (data) => {
   const doc = new jsPDF({
@@ -23,9 +24,9 @@ export const generarConstanciaTermino = (data) => {
   const textoLinea2 = `No. de Oficio SPAyT OCJ ${data.numeroOficio} / ${data.year}`
   const textoLinea3 = `Cd. Juárez, Chih., a ${data.date}`
 
-  const textContent = `La que suscribe, jefa de División del SUBSISTEMA DE PREPARATORIA ABIERTA Y TELEBACHILLERATO DEL ESTADO DE CHIHUAHUA en la entidad, dependiente de la Dirección General de Bachillerato de la Secretaría de Educación Pública con Clave 08EEX0001S, HACE CONSTAR que el (la) C.  ${ data.student.Nombre } ${ data.student.Primer_Apellido } ${ data.student.Segundo_Apellido } Matrícula ${data.student.Matricula}, ha iniciado ante estas oficinas su trámite de certificado de terminación de estudios de Preparatoria Abierta en el plan modular, de ser procedente la fecha de entrega es el día ${data.fecha_entrega}.`
+  const textContent = `La que suscribe, jefa de División del SUBSISTEMA DE PREPARATORIA ABIERTA Y TELEBACHILLERATO DEL ESTADO DE CHIHUAHUA en la entidad, dependiente de la Dirección General de Bachillerato de la Secretaría de Educación Pública con Clave 08EEX0001S, HACE CONSTAR que el (la) C.  ${ data.student.Nombre } ${ data.student.Primer_Apellido } ${ data.student.Segundo_Apellido } Matrícula ${data.student.Matricula}, ha iniciado ante estas oficinas su trámite de certificado de terminación de estudios de Preparatoria Abierta en el plan modular, de ser procedente la fecha de entrega es el día ${formattedDate(data.fechaEntregaCertificado)}.`
 
-  const textContent2 = `Se extiende la presente en Cd. Juárez, Chih. A los veintiocho días del mes de junio del dos mil veinticuatro, a solicitud del interesado (a) para los fines legales que correspondan. `
+  const textContent2 = `Se extiende la presente en Cd. Juárez, Chih. ${data.dateInWords}, a solicitud del interesado (a) para los fines legales que correspondan. `
 
   // Agregar las líneas de texto alineadas a la derecha
   doc.setFontSize(9)

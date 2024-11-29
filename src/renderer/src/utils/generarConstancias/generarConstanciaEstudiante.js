@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf'
 import logos from './logos.jpg'
 import spayt from './spayt.jpg'
 
-export const generarConstancia = (data) => {
+export const generarConstanciaEstudiante = (data) => {
   const doc = new jsPDF({
     unit: 'pt',
     format: [612, 792]
