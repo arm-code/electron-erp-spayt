@@ -39,3 +39,12 @@ body {
     display: none;
   }
 }
+
+.green-button { 
+  background-color: var(--green);
+
+}
+
+.blue-button {
+  background-color: var(--blue);
+}

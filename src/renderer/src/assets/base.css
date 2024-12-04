@@ -52,3 +52,81 @@ body {
   font-family: "IBM Plex Sans", sans-serif;  
   overflow-y: auto;
 }
+
+.green-button { 
+  background-color: var(--green);
+  color: var(--white);
+  border: none;
+  height: 40px;
+  width: 150px;
+  cursor: pointer;
+
+}
+
+.blue-button {
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  height: 40px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.red-button {
+  background-color: var(--red);
+  color: var(--white);
+  border: none;
+  height: 40px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.field-primary{
+  height: 40px;
+  font-size: var(--font-size-md);
+}
+
+.form-control{
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.form-control-inverse{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;  
+}
+
+.label-primary{
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.field-error-message{
+  display: flex;
+  flex-direction: column;
+}
+
+.png-icon{
+  height: 25px;
+}
+
+.aligment-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.mt1 {
+  margin-top: 15px;
+}
+
+.mb1 {
+  margin-bottom: 15px;
+}
+
+.mt2 {
+  margin-top: 30px;
+}
