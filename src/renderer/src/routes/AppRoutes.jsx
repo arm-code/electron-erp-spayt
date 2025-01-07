@@ -6,6 +6,8 @@ import { ConstanciasPage } from '../constancias/ConstanciasPage'
 import { CertificacionPage } from '../certificacion/CertificacionPage'
 import { StudentInformationPage } from '../constancias/studentInformationPage/StudentInformationPage'
 import CertificatePreviewPage from '../constancias/previewPage/CertificatePreviewPage'
+import { AllCertificates } from '../constancias/certificatesTable/AllCertificates'
+import EmitCertificates from '../constancias/emitCertificates/EmitCertificates'
 
 export const AppRoutes = () => {
   return (
@@ -16,6 +18,8 @@ export const AppRoutes = () => {
       <Route path="/certificacion" element={<CertificacionPage />} />
       <Route path="/student-info/:matricula" element={<StudentInformationPage />} />
       <Route path="/preview" element={<CertificatePreviewPage />} />
+      <Route path="/constancias-emitidas" element={<AllCertificates />} />
+      <Route path="/emitir-constancias" element={<EmitCertificates />} />
     </Routes>
   )
 }

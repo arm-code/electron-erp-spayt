@@ -41,8 +41,7 @@ export const GetStudent = () => {
 
         setError('Estudiante no existe')
       } else {
-        setError(null)
-        console.log('Estudiante encon6rado!!!')
+        setError(null)        
         navigate(`/student-info/${matricula}`)
       }
       
