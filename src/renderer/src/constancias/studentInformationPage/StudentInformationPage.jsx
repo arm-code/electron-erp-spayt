@@ -29,12 +29,8 @@ export const StudentInformationPage = () => {
   useEffect(() => {
     const getStudent = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/estudiante', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ matricula: matricula })
+        const response = await fetch(`http://localhost:1234/estudiantes/${matricula}`, {
+          method: 'GET',                    
         })
 
         if (!response.ok) {
@@ -43,7 +39,7 @@ export const StudentInformationPage = () => {
 
         const result = await response.json()
         console.log(result)
-        setStudent(result)
+        setStudent(result.data[0])
       } catch (err) {
         console.log(err)
       }

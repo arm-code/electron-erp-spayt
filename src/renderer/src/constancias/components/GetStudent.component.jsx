@@ -23,24 +23,26 @@ export const GetStudent = () => {
 
   const checkStudentExist = async (data) => {
     const matricula = data.matricula
+    console.log(matricula)
     try {
-      const response = await fetch('http://localhost:3000/api/estudiante/verificar', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:1234/estudiantes/${matricula}`, {
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          Accept: 'application/json',
         },
-        body: JSON.stringify(data)
-      })
+      });
 
       if (!response.ok) {
         throw new Error('No se pudo encontrar el estudiante')
       }
       const results = await response.json()        
+      console.log(results)
+      if (!results.success) {
 
-      if (!results.exists) {
         setError('Estudiante no existe')
       } else {
         setError(null)
+        console.log('Estudiante encon6rado!!!')
         navigate(`/student-info/${matricula}`)
       }
       
