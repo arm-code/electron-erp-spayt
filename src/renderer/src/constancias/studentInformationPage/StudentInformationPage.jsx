@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Module, PageContainer } from '../ConstanciasPage.styles'
 import closeButton from '../../assets/icons/delete.png'
 import checkButton from '../../assets/icons/check.png'
+import { formatDateToYYYYMMDD } from '../../utils/dates/dateFormats'
 
 export const StudentInformationPage = () => {
   const { matricula } = useParams()
@@ -64,18 +65,25 @@ export const StudentInformationPage = () => {
           <hr />
           <div className="form-control mt1 mb1">
             <div>
-              <p>Nombre completo:</p>
-              <p>Matricula:</p>
-              <p>CURP:</p>
+            <p>Matricula:</p>
+              <p>Nombre completo:</p>              
+              <p>Fecha de ingreso:</p>
+              <p>Área:</p>
             </div>
             <div>
+            <p>{student.Matricula}</p>
               <p>
                 {student.Nombre} {student.Primer_Apellido} {student.Segundo_Apellido}
               </p>
-              <p>{student.Matricula}</p>
-              <p>{student.CURP}</p>
+              
+              <p>{formatDateToYYYYMMDD(student.Fecha_alta)}</p>
+              <p>{student.Clave_Area}</p>
             </div>
           </div>
+
+          {/* 
+          NOS QUEDAMOS AQUI VIENDO COMO BUSCAR LA FECHA DE LA ULTIMA MATERIA APROBADA
+          */}
 
           <h2>Requisitos para emitir constancia:</h2>
           <hr />
